@@ -1,6 +1,6 @@
 #include "Wire.h"  //allows communication with I2C devices
 
-const int GY_ADDR = 0x68;
+const int GY_ADDR = 0x68; //I2C address of GY521
 
 int16_t accelerometer_x, accelerometer_y, accelerometer_z;
 int16_t gyroscope_x, gyroscope_y, gyroscope_z;
@@ -22,7 +22,7 @@ void setup() {
 }
 
 void loop() {
-  Wire.beginTransmission(MPU_ADDR);
+  Wire.beginTransmission(GY_ADDR);
   Wire.write(0x3B); //X value of acceloremeter is at register 0x3B so start reading here
   Wire.endTransmission(false); //keep the connection active
   Wire.requestFrom(GY_ADDR, 7*2, true); //each sensor value is stored in 2 registers
